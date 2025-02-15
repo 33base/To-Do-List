@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Видалити завдання</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
+        .warning { color: red; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Видалення завдання</h1>
+    <p class="warning">Ви впевнені, що хочете видалити "{{ task.title }}"?</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Так, видалити</button>
+    </form>
+
+    <br>
+    <a href="{% url 'task_list' %}">⬅ Скасувати</a>
+</body>
+</html>

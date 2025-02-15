@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if form.instance.pk %}Редагування{% else %}Нове завдання{% endif %}</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
+        form { display: inline-block; text-align: left; background: #f9f9f9; padding: 20px; border-radius: 8px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); }
+        label { font-weight: bold; }
+        input[type="text"], input[type="checkbox"] {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+        .error-message {
+            color: red;
+            font-weight: bold;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .back-link {
+            margin-top: 15px;
+            text-decoration: none;
+            color: #5a5a5a;
+            font-size: 16px;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{% if form.instance.pk %}Редагувати{% else %}Створити{% endif %} завдання</h1>
+
+        <form method="post">
+            {% csrf_token %}
+
+            {% if form %}
+                <label for="id_title">Назва завдання:</label>
+                {{ form.title }}
+
+                <label for="id_completed">Виконано:</label>
+                {{ form.completed }}
+
+                <button type="submit">Зберегти</button>
+            {% else %}
+                <p class="error-message">⚠ Помилка: форма не передана у шаблон.</p>
+            {% endif %}
+        </form>
+
+        <a class="back-link" href="{% url 'task_list' %}">⬅ Назад до списку завдань</a>
+    </div>
+</body>
+</html>
+

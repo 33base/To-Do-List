@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мої завдання</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
+        .task-container { max-width: 500px; margin: auto; text-align: left; }
+        .task { padding: 10px; border-bottom: 1px solid #ccc; }
+        .completed { color: green; font-weight: bold; }
+        .pending { color: red; font-weight: bold; }
+        a { display: inline-block; margin-top: 10px; text-decoration: none; color: blue; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <h1>Мої завдання</h1>
+
+    <div class="task-container">
+        {% if tasks %}
+            {% for task in tasks %}
+                <div class="task">
+                    <p class="{% if task.completed %}completed{% else %}pending{% endif %}">
+                        {{ task.title }} - {% if task.completed %}✅ Виконано{% else %}❌ В процесі{% endif %}
+                    </p>
+                    <a href="{% url 'task_update' task.id %}">Редагувати</a> |
+                    <a href="{% url 'task_delete' task.id %}">Видалити</a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Немає жодного завдання. Додайте нове!</p>
+        {% endif %}
+    </div>
+
+    <br>
+    <a href="{% url 'task_create' %}">➕ Додати нове завдання</a> |
+    <form action="{% url 'logout' %}" method="post" style="display: inline;">
+    {% csrf_token %}
+    <button type="submit" style="background: none; border: none; color: blue; text-decoration: underline; cursor: pointer;">
+        🚪 Вийти
+    </button>
+</form>
+</body>
+</html>
