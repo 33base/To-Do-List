@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Task
 from .forms import TaskForm
-
+from rest_framework import viewsets
+from .serializers import TaskSerializer
 # Create your views here.
 @login_required
 def task_list(request):
@@ -44,3 +45,7 @@ def task_delete(request, task_id):
         task.delete()
         return redirect('task_list')
     return render(request, 'todo/task_delete.html', {'task': task})
+
+class TaskViewSet(viewsets.ModelViewSet):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
