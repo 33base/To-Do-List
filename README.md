@@ -1,4 +1,4 @@
-# To-Do-List
+# Карта сайту https://djinni.co/
 ```mermaid
 flowchart TD
   A[Головна] --> B[Вакансії]
