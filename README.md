@@ -1,5 +1,5 @@
 # To-Do-List
-```mermeid
+```mermaid
 flowchart TD
   A[Головна] --> B[Вакансії]
   A --> C[Роботодавцям]
